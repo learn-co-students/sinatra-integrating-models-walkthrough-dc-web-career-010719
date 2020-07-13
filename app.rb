@@ -9,6 +9,10 @@ class App < Sinatra::Base
   post '/' do
     text_from_user = params[:user_text]
 
+    puts text_from_user
+    @analyzed_text = TextAnalyzer.new(text_from_user)
+    @key = @analyzed_text.most_used_letter.keys.first.upcase
+    @value = @analyzed_text.most_used_letter.values.first
     erb :results
   end
 end
